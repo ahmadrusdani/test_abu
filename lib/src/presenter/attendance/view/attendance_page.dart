@@ -79,7 +79,7 @@ class _AttendancePageState extends State<AttendancePage> with OSMMixinObserver {
                   CircleOSM(
                     key: "radius_circle",
                     centerPoint: state.initLocation!,
-                    radius: 100,
+                    radius: state.radius,
                     color: Colors.greenAccent.withOpacity(0.3),
                     strokeWidth: 2.0,
                   ),

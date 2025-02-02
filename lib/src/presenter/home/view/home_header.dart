@@ -43,41 +43,60 @@ class HomeHeader extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 10),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                            child: PrimaryButton(
-                          onPressed: state.currentAttendance?.checkIn != null
-                              ? null
-                              : () async {
-                                  final result =
-                                      await context.push('/attendance');
-                                  if (result is AttendanceItemModel) {
-                                    cubit.updateAttendanceIn(result);
-                                  }
-                                },
-                          child: const Text('Check-In'),
-                        )),
-                        const SizedBox(width: 14),
-                        Expanded(
-                            child: PrimaryButton(
-                          onPressed: state.currentAttendance?.checkIn == null ||
-                                  state.currentAttendance?.checkOut != null
-                              ? null
-                              : () async {
-                                  final result =
-                                      await context.push('/attendance');
-                                  if (result is AttendanceItemModel) {
-                                    cubit.updateAttendanceOut(result);
-                                  }
-                                },
-                          child: const Text(
-                            'Check-Out',
-                          ),
-                        )),
-                      ],
-                    )
+                    PrimaryButton(
+                      onPressed: state.isMustCheckIn || state.isMustCheckOut
+                          ? () async {
+                              final result = await context.push('/attendance');
+                              if (result is AttendanceItemModel) {
+                                if (state.isMustCheckIn) {
+                                  cubit.updateAttendanceIn(result);
+                                  return;
+                                }
+
+                                if (state.isMustCheckOut) {
+                                  cubit.updateAttendanceOut(result);
+                                  return;
+                                }
+                              }
+                            }
+                          : null,
+                      child: Text(state.buttonLabel),
+                    ),
+                    // Row(
+                    //   mainAxisSize: MainAxisSize.max,
+                    //   children: [
+                    //     Expanded(
+                    //         child: PrimaryButton(
+                    //       onPressed: state.currentAttendance?.checkIn != null
+                    //           ? null
+                    //           : () async {
+                    //               final result =
+                    //                   await context.push('/attendance');
+                    //               if (result is AttendanceItemModel) {
+                    //                 cubit.updateAttendanceIn(result);
+                    //               }
+                    //             },
+                    //       child: const Text('Check-In'),
+                    //     )),
+                    //     const SizedBox(width: 14),
+                    //     Expanded(
+                    //         child: PrimaryButton(
+                    //       onPressed: state.currentAttendance?.checkIn == null ||
+                    //               state.currentAttendance?.checkOut != null
+                    //           ? null
+                    //           : () async {
+                    //               final result =
+                    //                   await context.push('/attendance');
+                    //               if (result is AttendanceItemModel) {
+                    //                 cubit.updateAttendanceOut(result);
+                    //               }
+                    //             },
+                    //       child: const Text(
+                    //         'Check-Out',
+                    //       ),
+                    //     )),
+                    //   ],
+                    // )
                   ],
                 );
               },

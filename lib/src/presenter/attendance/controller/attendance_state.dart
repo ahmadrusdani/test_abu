@@ -9,6 +9,7 @@ class AttendanceState with _$AttendanceState {
     GeoPoint? initLocation,
     GeoPoint? currentLocation,
     GeoPoint? previousLocation,
+    @Default(20.0) double radius,
     String? error,
   }) = _AttendanceState;
 

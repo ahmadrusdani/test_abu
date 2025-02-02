@@ -21,4 +21,40 @@ class HomeState with _$HomeState {
     }
     return title;
   }
+
+  bool get isMustCheckIn {
+    if (currentAttendance != null) {
+      return currentAttendance!.checkIn == null &&
+          currentAttendance!.checkOut == null;
+    }
+    return currentAttendance == null;
+  }
+
+  bool get isMustCheckOut {
+    if (currentAttendance != null) {
+      return currentAttendance!.checkIn != null &&
+          currentAttendance!.checkOut == null;
+    }
+    return false;
+  }
+
+  bool get isCompleted {
+    if (currentAttendance != null) {
+      return currentAttendance!.checkIn != null &&
+          currentAttendance!.checkOut != null;
+    }
+    return false;
+  }
+
+  String get buttonLabel {
+    String label = 'Check-In';
+    if (isMustCheckOut) {
+      label = 'Check-Out';
+    }
+
+    if (isCompleted) {
+      label = 'Absen Selesai';
+    }
+    return label;
+  }
 }

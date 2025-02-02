@@ -14,8 +14,8 @@ class AttendanceCubit extends Cubit<AttendanceState> {
     if (isClosed) return;
     emit(state.copyWith(
         initLocation: GeoPoint(
-      latitude: -6.297471666666667,
-      longitude: 106.64094166666668,
+      latitude: -6.290195963175349,
+      longitude: 106.78260789857671,
     )));
   }
 
@@ -57,7 +57,7 @@ class AttendanceCubit extends Cubit<AttendanceState> {
       state.currentLocation!.longitude,
     );
     debugPrint('distance: $distance');
-    return distance <= 100.0;
+    return distance <= state.radius;
   }
 
   GeoPoint? zoomToRegion() {

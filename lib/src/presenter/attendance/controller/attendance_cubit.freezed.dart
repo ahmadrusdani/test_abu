@@ -19,6 +19,7 @@ mixin _$AttendanceState {
   GeoPoint? get initLocation => throw _privateConstructorUsedError;
   GeoPoint? get currentLocation => throw _privateConstructorUsedError;
   GeoPoint? get previousLocation => throw _privateConstructorUsedError;
+  double get radius => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -36,6 +37,7 @@ abstract class $AttendanceStateCopyWith<$Res> {
       {GeoPoint? initLocation,
       GeoPoint? currentLocation,
       GeoPoint? previousLocation,
+      double radius,
       String? error});
 }
 
@@ -55,6 +57,7 @@ class _$AttendanceStateCopyWithImpl<$Res, $Val extends AttendanceState>
     Object? initLocation = freezed,
     Object? currentLocation = freezed,
     Object? previousLocation = freezed,
+    Object? radius = null,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
@@ -70,6 +73,10 @@ class _$AttendanceStateCopyWithImpl<$Res, $Val extends AttendanceState>
           ? _value.previousLocation
           : previousLocation // ignore: cast_nullable_to_non_nullable
               as GeoPoint?,
+      radius: null == radius
+          ? _value.radius
+          : radius // ignore: cast_nullable_to_non_nullable
+              as double,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -90,6 +97,7 @@ abstract class _$$AttendanceStateImplCopyWith<$Res>
       {GeoPoint? initLocation,
       GeoPoint? currentLocation,
       GeoPoint? previousLocation,
+      double radius,
       String? error});
 }
 
@@ -107,6 +115,7 @@ class __$$AttendanceStateImplCopyWithImpl<$Res>
     Object? initLocation = freezed,
     Object? currentLocation = freezed,
     Object? previousLocation = freezed,
+    Object? radius = null,
     Object? error = freezed,
   }) {
     return _then(_$AttendanceStateImpl(
@@ -122,6 +131,10 @@ class __$$AttendanceStateImplCopyWithImpl<$Res>
           ? _value.previousLocation
           : previousLocation // ignore: cast_nullable_to_non_nullable
               as GeoPoint?,
+      radius: null == radius
+          ? _value.radius
+          : radius // ignore: cast_nullable_to_non_nullable
+              as double,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -137,6 +150,7 @@ class _$AttendanceStateImpl extends _AttendanceState {
       {this.initLocation,
       this.currentLocation,
       this.previousLocation,
+      this.radius = 20.0,
       this.error})
       : super._();
 
@@ -147,11 +161,14 @@ class _$AttendanceStateImpl extends _AttendanceState {
   @override
   final GeoPoint? previousLocation;
   @override
+  @JsonKey()
+  final double radius;
+  @override
   final String? error;
 
   @override
   String toString() {
-    return 'AttendanceState(initLocation: $initLocation, currentLocation: $currentLocation, previousLocation: $previousLocation, error: $error)';
+    return 'AttendanceState(initLocation: $initLocation, currentLocation: $currentLocation, previousLocation: $previousLocation, radius: $radius, error: $error)';
   }
 
   @override
@@ -165,12 +182,13 @@ class _$AttendanceStateImpl extends _AttendanceState {
                 other.currentLocation == currentLocation) &&
             (identical(other.previousLocation, previousLocation) ||
                 other.previousLocation == previousLocation) &&
+            (identical(other.radius, radius) || other.radius == radius) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, initLocation, currentLocation, previousLocation, error);
+  int get hashCode => Object.hash(runtimeType, initLocation, currentLocation,
+      previousLocation, radius, error);
 
   @JsonKey(ignore: true)
   @override
@@ -185,6 +203,7 @@ abstract class _AttendanceState extends AttendanceState {
       {final GeoPoint? initLocation,
       final GeoPoint? currentLocation,
       final GeoPoint? previousLocation,
+      final double radius,
       final String? error}) = _$AttendanceStateImpl;
   const _AttendanceState._() : super._();
 
@@ -194,6 +213,8 @@ abstract class _AttendanceState extends AttendanceState {
   GeoPoint? get currentLocation;
   @override
   GeoPoint? get previousLocation;
+  @override
+  double get radius;
   @override
   String? get error;
   @override
